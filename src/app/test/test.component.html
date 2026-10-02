@@ -1,0 +1,62 @@
+<div class="page-wrapper">
+  <div class="test-container">
+
+    <header class="test-header">
+      <h1 class="test-title">{{ 'TEST.TITLE' | translate }}</h1>
+      @if (timerEnabled) {
+        <app-timer-display [minutes]="timerMinutes" (expired)="onTimerExpired()"></app-timer-display>
+      }
+      <p class="test-lead">{{ 'TEST.LEAD' | translate }}</p>
+      <div class="scale-legend">
+        <span class="scale-legend-item"><b>1</b> - {{ 'TEST.SCALE_LOW' | translate }}</span>
+        <span class="scale-legend-item"><b>5</b> - {{ 'TEST.SCALE_HIGH' | translate }}</span>
+      </div>
+    </header>
+
+    <div class="progress-bar">
+      <div class="progress-fill" [style.width.%]="(answeredCount() / totalItems) * 100"></div>
+    </div>
+    <p class="progress-label">{{ 'TEST.PROGRESS' | translate: { answered: answeredCount(), total: totalItems } }}</p>
+
+    @for (section of sections; track section.factor) {
+      <section class="subscale-section">
+        <h2 class="subscale-title">{{ 'FACTOR.' + section.factor | translate }}</h2>
+        <div class="item-list">
+          @for (item of section.items; track item.id) {
+            <div class="item-row card" [class.item-row--answered]="answers()[item.id] !== undefined">
+              <span class="item-text">{{ 'BIGFIVE.ITEM.' + item.id | translate }}</span>
+              <div class="likert" role="radiogroup" [attr.aria-label]="'BIGFIVE.ITEM.' + item.id | translate">
+                @for (v of [1, 2, 3, 4, 5]; track v) {
+                  <button
+                    type="button"
+                    class="likert-btn"
+                    [class.likert-btn--selected]="answers()[item.id] === v"
+                    (click)="setAnswer(item.id, v)"
+                    [attr.aria-pressed]="answers()[item.id] === v"
+                  >{{ v }}</button>
+                }
+              </div>
+            </div>
+          }
+        </div>
+      </section>
+    }
+
+    <div class="test-footer">
+      @if (!allAnswered()) {
+        <span class="submit-hint">{{ 'TEST.SUBMIT_HINT' | translate }}</span>
+      }
+      @if (submitError()) {
+        <span class="field-error">{{ 'TEST.SUBMIT_ERROR' | translate }}</span>
+      }
+      <button type="button" class="btn-primary" [disabled]="!allAnswered() || submitting()" (click)="submit()">
+        @if (submitting()) {
+          {{ 'TEST.SUBMIT_SENDING' | translate }}
+        } @else {
+          {{ 'TEST.SUBMIT' | translate }}
+        }
+      </button>
+    </div>
+
+  </div>
+</div>

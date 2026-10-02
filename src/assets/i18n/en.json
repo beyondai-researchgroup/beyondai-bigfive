@@ -1,0 +1,84 @@
+{
+  "LOGIN": {
+    "TITLE": "Big Five",
+    "SUBTITLE": "Personality test (OCEAN)",
+    "PARTICIPANT_LABEL": "Participant identification code",
+    "PARTICIPANT_PLACEHOLDER": "e.g. 001",
+    "PARTICIPANT_ERROR": "Enter your identification code.",
+    "PARTICIPANT_NOT_FOUND": "No participant found with this code.",
+    "CHECK_ERROR": "Error checking the participant. Please try again.",
+    "PERSONAL_LINK_REQUIRED": "This participant can only be accessed via the personal link you were emailed.",
+    "SUBMIT": "Continue",
+    "SUBMIT_CHECKING": "Checking…",
+    "LANG_LABEL": "Language"
+  },
+  "TEST": {
+    "TITLE": "Big Five questionnaire",
+    "LEAD": "For each statement, choose how much you agree with it, from \"strongly disagree\" to \"strongly agree\".",
+    "SCALE_LOW": "Strongly disagree",
+    "SCALE_HIGH": "Strongly agree",
+    "PROGRESS": "{{answered}}/{{total}} answered",
+    "SUBMIT": "Submit answers",
+    "SUBMIT_SENDING": "Sending…",
+    "SUBMIT_HINT": "Answer every statement to submit the questionnaire.",
+    "SUBMIT_ERROR": "Error sending your answers. Please try again."
+  },
+  "FACTOR": {
+    "O": "Openness to Experience",
+    "C": "Conscientiousness",
+    "E": "Extraversion",
+    "A": "Agreeableness",
+    "N": "Neuroticism"
+  },
+  "DONE": {
+    "TITLE": "Thank you!",
+    "TEXT": "Your answers were saved successfully. You may close this page."
+  },
+  "ACCESS_INFO": {
+    "TITLE": "Access via personal link only",
+    "TEXT": "This questionnaire can only be accessed via the personal link emailed to you after you gave consent to participate in the research. Check your inbox, or contact the researcher at beyondai.researchgroup@gmail.com if you didn't receive an email."
+  },
+  "LINK": {
+    "LOADING": "Checking your link…",
+    "ALREADY_TITLE": "Questionnaire already completed",
+    "ALREADY_TEXT": "You've already completed this questionnaire, thank you! You may close this page.",
+    "ERROR_TITLE": "Invalid link",
+    "ERROR_EXPIRED": "This link has expired (links are valid for 24 hours). Please contact the researcher to get a new one.",
+    "ERROR_NOT_FOUND": "This link wasn't recognized. Check that you copied the full link from the email, or contact the researcher.",
+    "ERROR_NOT_ACTIVE": "This link isn't active right now. Please contact the researcher.",
+    "ERROR_SERVER": "An error occurred while checking your link. Please try again shortly."
+  },
+  "BIGFIVE": {
+    "ITEM": {
+      "1": "I enjoy exploring new ideas and concepts.",
+      "2": "I easily adapt to unfamiliar situations.",
+      "3": "I enjoy art and creative activities.",
+      "4": "I always look for new ways of doing things.",
+      "5": "I like reading books that make me think.",
+      "6": "I enjoy discussing abstract topics.",
+      "7": "I complete tasks on time, even when they are complex.",
+      "8": "I am very organized in my daily responsibilities.",
+      "9": "I pay attention to detail when carrying out tasks.",
+      "10": "I set high goals for myself and work hard to achieve them.",
+      "11": "I rarely put off tasks for later.",
+      "12": "I enjoy socializing with large groups of people.",
+      "13": "I easily start conversations with strangers.",
+      "14": "I enjoy being the center of attention.",
+      "15": "I often initiate social activities.",
+      "16": "I enjoy meeting new people.",
+      "17": "I enjoy activities that involve teamwork.",
+      "18": "I try to avoid conflicts with others.",
+      "19": "I often help others, even when it's not my responsibility.",
+      "20": "I believe it's important to be kind to everyone.",
+      "21": "I easily forgive others when they hurt me.",
+      "22": "I enjoy working in a harmonious environment.",
+      "23": "I try to understand other people's feelings.",
+      "24": "I often worry about things that might not even happen.",
+      "25": "I find it hard to calm down after stressful situations.",
+      "26": "I often feel tense and anxious.",
+      "27": "I get upset easily when things don't go according to plan.",
+      "28": "I sometimes feel overwhelmed even by simple tasks.",
+      "29": "I tend to overanalyze negative situations."
+    }
+  }
+}

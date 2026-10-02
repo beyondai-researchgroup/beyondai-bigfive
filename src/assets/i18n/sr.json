@@ -1,0 +1,84 @@
+{
+  "LOGIN": {
+    "TITLE": "Big Five",
+    "SUBTITLE": "Test ličnosti (OCEAN)",
+    "PARTICIPANT_LABEL": "Identifikacioni kod učesnika",
+    "PARTICIPANT_PLACEHOLDER": "npr. 001",
+    "PARTICIPANT_ERROR": "Unesite identifikacioni kod.",
+    "PARTICIPANT_NOT_FOUND": "Učesnik sa ovim kodom nije pronađen.",
+    "CHECK_ERROR": "Greška pri proveri učesnika. Pokušajte ponovo.",
+    "PERSONAL_LINK_REQUIRED": "Ovom učesniku se može pristupiti samo preko ličnog linka koji ste dobili mejlom.",
+    "SUBMIT": "Nastavi",
+    "SUBMIT_CHECKING": "Proveravam…",
+    "LANG_LABEL": "Jezik"
+  },
+  "TEST": {
+    "TITLE": "Big Five upitnik",
+    "LEAD": "Za svaku tvrdnju izaberite koliko se slažete sa njom, od „ne slažem se uopšte” do „potpuno se slažem”.",
+    "SCALE_LOW": "Ne slažem se uopšte",
+    "SCALE_HIGH": "Potpuno se slažem",
+    "PROGRESS": "{{answered}}/{{total}} odgovoreno",
+    "SUBMIT": "Pošalji odgovore",
+    "SUBMIT_SENDING": "Šaljem…",
+    "SUBMIT_HINT": "Odgovorite na sve tvrdnje da biste mogli da pošaljete upitnik.",
+    "SUBMIT_ERROR": "Greška pri slanju odgovora. Pokušajte ponovo."
+  },
+  "FACTOR": {
+    "O": "Otvorenost ka iskustvu",
+    "C": "Savesnost",
+    "E": "Ekstraverzija",
+    "A": "Saradljivost",
+    "N": "Neuroticizam"
+  },
+  "DONE": {
+    "TITLE": "Hvala vam!",
+    "TEXT": "Vaši odgovori su uspešno sačuvani. Možete zatvoriti ovu stranicu."
+  },
+  "ACCESS_INFO": {
+    "TITLE": "Pristup samo preko ličnog linka",
+    "TEXT": "Ovom upitniku možete pristupiti samo preko ličnog linka koji ste dobili mejlom nakon što ste dali pristanak za učešće u istraživanju. Proverite svoj inboks, ili se obratite istraživaču na beyondai.researchgroup@gmail.com ako niste dobili mejl."
+  },
+  "LINK": {
+    "LOADING": "Proveravam link…",
+    "ALREADY_TITLE": "Upitnik je već popunjen",
+    "ALREADY_TEXT": "Već ste popunili ovaj upitnik, hvala Vam! Možete zatvoriti ovu stranicu.",
+    "ERROR_TITLE": "Link nije važeći",
+    "ERROR_EXPIRED": "Ovaj link je istekao (linkovi važe 24 sata). Obratite se istraživaču kako bi Vam poslao novi link.",
+    "ERROR_NOT_FOUND": "Ovaj link nije prepoznat. Proverite da li ste kopirali ceo link iz mejla, ili se obratite istraživaču.",
+    "ERROR_NOT_ACTIVE": "Ovaj link trenutno nije aktivan. Obratite se istraživaču.",
+    "ERROR_SERVER": "Došlo je do greške pri proveri linka. Pokušajte ponovo malo kasnije."
+  },
+  "BIGFIVE": {
+    "ITEM": {
+      "1": "Uživam u istraživanju novih ideja i koncepata.",
+      "2": "Lako prihvatam nepoznate situacije.",
+      "3": "Uživam u umetnosti i kreativnim aktivnostima.",
+      "4": "Uvek tražim nove načine za obavljanje stvari.",
+      "5": "Volim da čitam knjige koje me podstiču na razmišljanje.",
+      "6": "Uživam u diskusijama o apstraktnim temama.",
+      "7": "Završavam zadatke na vreme, čak i kada su složeni.",
+      "8": "Veoma sam organizovan/a u svakodnevnim obavezama.",
+      "9": "Obraćam pažnju na detalje prilikom izvršavanja zadataka.",
+      "10": "Postavljam sebi visoke ciljeve i naporno radim da ih ostvarim.",
+      "11": "Retko odlažem zadatke za kasnije.",
+      "12": "Uživam u druženju sa velikim grupama ljudi.",
+      "13": "Lako započinjem razgovor sa nepoznatim osobama.",
+      "14": "Uživam u tome da budem u centru pažnje.",
+      "15": "Često iniciram društvene aktivnosti.",
+      "16": "Uživam u upoznavanju novih ljudi.",
+      "17": "Uživam u aktivnostima koje podrazumevaju timski rad.",
+      "18": "Trudim se da izbegavam konflikte sa drugima.",
+      "19": "Često pomažem drugima, čak i kada to nije moja obaveza.",
+      "20": "Verujem da je važno biti ljubazan prema svima.",
+      "21": "Lako opraštam drugima kada me povrede.",
+      "22": "Uživam u radu u harmoničnom okruženju.",
+      "23": "Trudim se da razumem osećanja drugih ljudi.",
+      "24": "Često brinem o stvarima koje se možda neće ni desiti.",
+      "25": "Teško mi je da se smirim nakon stresnih situacija.",
+      "26": "Često se osećam napeto i anksiozno.",
+      "27": "Lako se uzrujam kada stvari ne idu po planu.",
+      "28": "Ponekad se osećam preopterećeno čak i jednostavnim zadacima.",
+      "29": "Sklon/a sam preteranoj analizi negativnih situacija."
+    }
+  }
+}

@@ -1,0 +1,60 @@
+<div class="page-centered">
+  <div class="login-container">
+    <header class="login-header">
+      <h1 class="login-title">{{ 'LOGIN.TITLE' | translate }}</h1>
+      <p class="login-subtitle">{{ 'LOGIN.SUBTITLE' | translate }}</p>
+    </header>
+
+    <div class="card login-card">
+      <form [formGroup]="form" (ngSubmit)="submit()">
+
+        <div class="field-group">
+          <label class="field-label">{{ 'LOGIN.LANG_LABEL' | translate }}</label>
+          <div class="lang-toggle">
+            <button type="button" class="lang-toggle__btn" [class.lang-toggle__btn--active]="currentLang() === 'sr'" (click)="setLang('sr')">SR - Srpski</button>
+            <button type="button" class="lang-toggle__btn" [class.lang-toggle__btn--active]="currentLang() === 'en'" (click)="setLang('en')">EN - English</button>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="pid">{{ 'LOGIN.PARTICIPANT_LABEL' | translate }}</label>
+          <input
+            id="pid"
+            type="text"
+            class="text-input"
+            formControlName="participantId"
+            [placeholder]="'LOGIN.PARTICIPANT_PLACEHOLDER' | translate"
+            autocomplete="off"
+            [attr.aria-label]="'LOGIN.PARTICIPANT_LABEL' | translate"
+            (input)="onParticipantIdInput()"
+          />
+          @if (form.controls.participantId.invalid && form.controls.participantId.touched) {
+            <span class="field-error">{{ 'LOGIN.PARTICIPANT_ERROR' | translate }}</span>
+          }
+          @if (participantNotFound()) {
+            <span class="field-error">{{ 'LOGIN.PARTICIPANT_NOT_FOUND' | translate }}</span>
+          }
+          @if (checkFailed()) {
+            <span class="field-error">{{ 'LOGIN.CHECK_ERROR' | translate }}</span>
+          }
+          @if (personalLinkRequired()) {
+            <span class="field-error">{{ 'LOGIN.PERSONAL_LINK_REQUIRED' | translate }}</span>
+          }
+        </div>
+
+        <button
+          type="submit"
+          class="btn-primary"
+          [disabled]="form.invalid || isChecking()"
+        >
+          @if (isChecking()) {
+            {{ 'LOGIN.SUBMIT_CHECKING' | translate }}
+          } @else {
+            {{ 'LOGIN.SUBMIT' | translate }}
+          }
+        </button>
+
+      </form>
+    </div>
+  </div>
+</div>
