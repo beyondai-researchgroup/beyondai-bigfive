@@ -288,10 +288,12 @@ app.post('/api/result', async (req, res) => {
           ${b.isTimedOut === true}
         )
       `;
-      res.status(201).json({ ok: true });
-      maybeSendIntroEmail(sql, participantRows[0].Guid).catch((err) =>
+      // Awaited before responding: on Vercel a serverless function can be frozen as soon as the
+      // response is sent, which would silently drop a fire-and-forget email. Never fails the save.
+      await maybeSendIntroEmail(sql, participantRows[0].Guid).catch((err) =>
         console.error('[bigfive] intro email trigger failed:', err)
       );
+      res.status(201).json({ ok: true });
       return;
     }
 
@@ -323,6 +325,12 @@ app.post('/api/result', async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`Big Five API server listening on http://localhost:${PORT}`);
-});
+// On Vercel this app runs as a serverless function (api/index.mjs imports it) — only bind a port
+// when started directly for local dev (npm run serve:api).
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`Big Five API server listening on http://localhost:${PORT}`);
+  });
+}
+
+export default app;
