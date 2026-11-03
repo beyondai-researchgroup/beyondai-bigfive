@@ -9,6 +9,7 @@ import cors from 'cors';
 import { neon } from '@neondatabase/serverless';
 import { createLocalSql } from './server/local-db.mjs';
 import { sendMail } from './server/email/mailer.mjs';
+import { resolveBranding } from './server/email/branding.mjs';
 import { buildIntroTaskEmail } from './server/email/introTaskEmail.mjs';
 
 const PORT = process.env.PORT || 4311;
@@ -165,7 +166,7 @@ app.get('/api/link/:token', async (req, res) => {
     // identical fix for the full rationale (ParticipantId is scoped per research now, not
     // globally unique; the Token itself is what already uniquely resolves the participant).
     const rows = await sql`
-      SELECT sat."ParticipantId", sat."ParticipantGuid", sat."ExpiresAt", p."Language",
+      SELECT r."ShowBeyondAiBranding", sat."ParticipantId", sat."ParticipantGuid", sat."ExpiresAt", p."Language",
              COALESCE(r."ConsentPortalActive", TRUE) AS "ConsentPortalActive",
              COALESCE(r."TimerBigFiveEnabled", FALSE) AS "TimerBigFiveEnabled", r."TimerBigFiveMinutes"
       FROM "SurveyAccessToken" sat
@@ -180,7 +181,7 @@ app.get('/api/link/:token', async (req, res) => {
     }
     const row = rows[0];
     if (new Date(row.ExpiresAt) < new Date()) {
-      res.status(410).json({ error: 'EXPIRED' });
+      res.status(410).json({ error: 'EXPIRED', showBranding: row.ShowBeyondAiBranding !== false });
       return;
     }
     // 2026-09-09 master pause switch — same Research.ConsentPortalActive column the Consent
@@ -188,17 +189,18 @@ app.get('/api/link/:token', async (req, res) => {
     // participant with no ResearchId (pre-Phase-A/B row) is never blocked — matches this
     // codebase's established fallback convention for that case.
     if (!row.ConsentPortalActive) {
-      res.status(403).json({ error: 'NOT_ACTIVE' });
+      res.status(403).json({ error: 'NOT_ACTIVE', showBranding: row.ShowBeyondAiBranding !== false });
       return;
     }
     const existing = await sql`SELECT 1 FROM "BigFiveResult" WHERE "ParticipantGuid" = ${row.ParticipantGuid} LIMIT 1`;
     if (existing.length) {
-      res.status(409).json({ error: 'ALREADY_COMPLETED' });
+      res.status(409).json({ error: 'ALREADY_COMPLETED', showBranding: row.ShowBeyondAiBranding !== false });
       return;
     }
     res.json({
       participantId: row.ParticipantId,
       lang: row.Language ?? 'sr',
+      showBranding: row.ShowBeyondAiBranding !== false,
       timerEnabled: row.TimerBigFiveEnabled === true,
       timerMinutes: row.TimerBigFiveEnabled ? row.TimerBigFiveMinutes : null,
     });
@@ -224,7 +226,7 @@ const CODE_REVIEW_TOKEN_TTL_MS = 100 * 365 * 24 * 60 * 60 * 1000;
  */
 async function maybeSendIntroEmail(sql, participantGuid) {
   const rows = await sql`
-    SELECT p."Email", p."Language", r."TaskType", r."EmailSenderName", r."StudyDisplayName", r."Name" AS "ResearchName"
+    SELECT p."Email", p."Language", r."TaskType", r."EmailSenderName", r."StudyDisplayName", r."Name" AS "ResearchName", r."ShowBeyondAiBranding"
     FROM "Participant" p JOIN "Research" r ON r."Id" = p."ResearchId"
     WHERE p."Guid" = ${participantGuid}
   `;
@@ -254,8 +256,10 @@ async function maybeSendIntroEmail(sql, participantGuid) {
   `;
 
   const url = `${CODE_REVIEW_APP_URL}/?link=${token}`;
-  const senderName = p.EmailSenderName ?? p.StudyDisplayName ?? p.ResearchName ?? undefined;
-  const { subject, html } = buildIntroTaskEmail(p.Language ?? 'sr', { url, senderName });
+  // Branding off (Research.ShowBeyondAiBranding): neutral header / From name and no contact line (see server/email/branding.mjs).
+  const branding = resolveBranding({ showBranding: p.ShowBeyondAiBranding, emailSenderName: p.EmailSenderName, studyDisplayName: p.StudyDisplayName, name: p.ResearchName });
+  const senderName = branding.senderName ?? undefined;
+  const { subject, html } = buildIntroTaskEmail(p.Language ?? 'sr', { url, senderName, hideContact: branding.hideContact });
   await sendMail({ to: p.Email, subject, html, fromName: senderName });
 }
 
